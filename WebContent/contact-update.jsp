@@ -10,12 +10,12 @@
 <body>
 	<h1>Contact</h1>
 
-		<h1>Gestionnaire de contacts</h1>
+		<h1>Modifier contact</h1>
 		
-	<form method="post" action="SaveServlet">
-		Civilité : <br> <input type="text" name="civilite"><br>
-		Nom : <br> <input type="text" name="nom"><br>
-		Prenom : <br> <input type="text" name="prenom"><br>
+	<form method="post" action="UpdateServlet">
+		Civilité : <br> <input type="text" name="civilite" placeholder=""><br>
+		Nom : <br> <input type="text" name="nom" placeholder="">><br>
+		Prenom : <br> <input type="text" name="prenom" placeholder="">><br>
 		<br> <input type="submit" value="Envoyer"> <input
 			type="reset" value="RAZ">
 

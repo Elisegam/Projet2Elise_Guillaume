@@ -21,6 +21,7 @@
 				<td>${contact.civilite}</td>
 				<td>${contact.nom}</td>
 				<td>${contact.prenom}</td>
+			
 			</tr>
 		</c:forEach>
 	</table>

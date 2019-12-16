@@ -1,6 +1,7 @@
 package contacts.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -8,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -25,6 +27,9 @@ public class Contact implements Serializable {
 	private String prenom;
 //	private String surnom;
 
+	@ManyToMany
+	private Collection<Adresse> adresses;
+	
 	public Contact() {
 	}
 

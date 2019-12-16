@@ -26,6 +26,7 @@ public class Adresse implements Serializable {
 	private int codePostal;
 	private String ville;
 	private String pays;
+	
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(name = "contacts_adresses", joinColumns = @JoinColumn(name = "fk_adresse"), inverseJoinColumns = @JoinColumn(name = "fk_personne"))
 	private List<Contact> contacts;
