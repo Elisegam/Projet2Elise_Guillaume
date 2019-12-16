@@ -34,6 +34,14 @@ public class Contact implements Serializable {
 		this.prenom = prenom;
 //		this.surnom = surnom;
 	}
+	
+	public Contact(long pk,String civilite, String nom, String prenom) {
+		this.pk =pk;
+		this.civilite = civilite;
+		this.nom = nom;
+		this.prenom = prenom;
+//		this.surnom = surnom;
+	}
 
 	public String getCivilite() {
 		return civilite;

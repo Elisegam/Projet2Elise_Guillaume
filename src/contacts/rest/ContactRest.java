@@ -44,14 +44,14 @@ public class ContactRest {
 	@POST
 	@Path("/delete")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void delete(Contact contact) {
-		cs.supprimer(contact);
+	public void delete(long pk) {
+		cs.supprimer(pk);
 	}
 
 	@GET
 	@Path("/all")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<String> getAllContact() {
+	public List<Contact> getAllContact() {
 		return cs.getContacts();
 	}
 }

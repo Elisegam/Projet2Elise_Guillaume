@@ -28,11 +28,11 @@ public class ContactService {
 		return contact.getPk();
 	}
 	
-	public void supprimer(Contact contact) {
-		contactDao.delete(contact);
+	public void supprimer(long pk) {
+		contactDao.delete(pk);
 	}
 	
-	public List<String> getContacts(){
+	public List<Contact> getContacts(){
 		return contactDao.getAllContact();
 	}
 }
