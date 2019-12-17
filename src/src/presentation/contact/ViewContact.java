@@ -14,44 +14,39 @@ import contacts.entities.Contact;
 import contacts.services.ContactService;
 
 /**
- * Classe permettant d'obtenir et de lier les informations enregistrées sur un contact avec son pk afin de les modifier.
+ * Classe permettant d'obtenir et de lier les informations enregistrées sur un contact avec son pk afin de les lire.
  * 
  * 
  * @author GAMASSA Elise et ESPITIA Guillaume
  * @version 1.0
  * 
 /**
- * Servlet implementation class UpdateButton
+ * Servlet implementation class ViewContact
  */
-@WebServlet("/UpdateButton")
-public class UpdateButton extends HttpServlet {
+@WebServlet("/ViewContact")
+public class ViewContact extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@EJB
 	private ContactService contactservice;
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ViewContact() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
-	 * @see HttpServlet#HttpServlet()
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public UpdateButton() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-
 	/**
 	 * Méthode permettant d'obtenir les informations sur un contact à l'aide de son
 	 * identifiant unique.
@@ -59,9 +54,9 @@ public class UpdateButton extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		long pk = Integer.parseInt(request.getParameter("pk"));
-		Contact contactUpdate = contactservice.findContactById(pk);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("contact-update.jsp");
-		request.setAttribute("contact", contactUpdate);
+		Contact contactView = contactservice.findContactById(pk);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("contactView.jsp");
+		request.setAttribute("contact", contactView);
 		dispatcher.forward(request, response);
 	}
 

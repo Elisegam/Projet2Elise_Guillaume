@@ -40,6 +40,12 @@
 					<tbody>
 						<c:forEach var="contact" items="${listContact}">
 							<tr>
+							<td><form
+										action="ViewContact?pk=<c:out value='${contact.pk}'/>"
+										method="post" /> <input type="hidden" name="pk"
+									value='${contact.pk}'> <input type="submit"
+									value="VoirContact">
+									</form></td>
 								<td>${contact.civilite}</td>
 								<td>${contact.nom}</td>
 								<td>${contact.prenom}</td>

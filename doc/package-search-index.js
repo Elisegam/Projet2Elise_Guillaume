@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"contacts.dao"},{"l":"contacts.entities"},{"l":"contacts.rest"},{"l":"contacts.services"},{"l":"src.presentation.contact"}]
