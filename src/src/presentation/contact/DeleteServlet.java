@@ -1,6 +1,9 @@
 package src.presentation.contact;
 
 import java.io.IOException;
+
+import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import contacts.dao.ContactDAO;
 import contacts.entities.Contact;
+import contacts.services.ContactService;
+
+/**
+ * Classe permettant de supprimer dynamiquement des contacts enregistrés.
+ * 
+ * 
+ * @author GAMASSA Elise et ESPITIA Guillaume
+ * @version 1.0
+ * 
+ */
 
 /**
  * Servlet implementation class DeleteServlet
@@ -16,39 +29,43 @@ import contacts.entities.Contact;
 @WebServlet("/DeleteServlet")
 public class DeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DeleteServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	@EJB
+	private ContactService contactservice;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String idStr = request.getParameter("id");
-		Long pk = (long) Integer.parseInt(idStr);
-		
-		ContactDAO dao = new ContactDAO();
-		Contact contact = dao.find(pk);
-		dao.delete(pk);
-		
-		String message = "Contact supprimer avec succès !";
-		request.setAttribute("message", message);
-		request.getRequestDispatcher("listContact").forward(request, response);
-		
+	public DeleteServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	/**
+	 * Méthode permettant de supprimer un contact identifié par son pk.
+	 */
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		long pk = Integer.parseInt(request.getParameter("pk"));
+
+		contactservice.supprimer(pk);
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/ContactServlet");
+		dispatcher.forward(request, response);
 	}
 
 }

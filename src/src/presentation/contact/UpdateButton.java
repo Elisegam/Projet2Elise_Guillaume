@@ -10,12 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import contacts.entities.Adresse;
 import contacts.entities.Contact;
 import contacts.services.ContactService;
 
 /**
- * Classe permettant de modifier les informations enregistrées sur un utilisateur.
+ * Classe permettant d'obtenir et de lier les informations enregistrées sur un contact avec son pk afin de les modifier.
  * 
  * 
  * @author GAMASSA Elise et ESPITIA Guillaume
@@ -23,10 +22,10 @@ import contacts.services.ContactService;
  * 
  */
 /**
- * Servlet implementation class UpdateContact
+ * Servlet implementation class UpdateButton
  */
-@WebServlet("/UpdateContact")
-public class UpdateContact extends HttpServlet {
+@WebServlet("/UpdateButton")
+public class UpdateButton extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@EJB
 	private ContactService contactservice;
@@ -34,7 +33,7 @@ public class UpdateContact extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public UpdateContact() {
+	public UpdateButton() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -55,24 +54,15 @@ public class UpdateContact extends HttpServlet {
 	 */
 
 	/**
-	 * Méthode permettant de modifier les informations enregistrées sur les
-	 * contacts.
+	 * Méthode permettant d'obtenir les informations sur un contact à l'aide de son
+	 * identifiant unique.
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int pk = Integer.parseInt(request.getParameter("pk"));
-		String civilite = request.getParameter("civilite");
-		String nom = request.getParameter("nom");
-		String prenom = request.getParameter("prenom");
-		String rue = request.getParameter("rue");
-		String codePostal = request.getParameter("codePostal");
-		String ville = request.getParameter("ville");
-		String pays = request.getParameter("pays");
-		Adresse adresse = new Adresse(rue, codePostal, ville, pays);
-		Contact oldContact = new Contact(pk, civilite, nom, prenom, adresse);
-		contactservice.update(oldContact);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("ContactServlet");
-		request.setAttribute("oldContact", oldContact);
+		long pk = Integer.parseInt(request.getParameter("pk"));
+		Contact contactUpdate = contactservice.findContactById(pk);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("contact-update.jsp");
+		request.setAttribute("contact", contactUpdate);
 		dispatcher.forward(request, response);
 	}
 

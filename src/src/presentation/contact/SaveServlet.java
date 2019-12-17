@@ -10,8 +10,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import contacts.entities.Adresse;
 import contacts.entities.Contact;
 import contacts.services.ContactService;
+
+/**
+ * Classe permettant de sauvegarder dynamiquement les contacts enregistrés.
+ * 
+ * 
+ * @author GAMASSA Elise et ESPITIA Guillaume
+ * @version 1.0
+ * 
+ */
 
 /**
  * Servlet implementation class SaveServlet
@@ -19,33 +29,48 @@ import contacts.services.ContactService;
 @WebServlet("/SaveServlet")
 public class SaveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	 @EJB private ContactService contactservice;
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public SaveServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	@EJB
+	private ContactService contactservice;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public SaveServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	/**
+	 * Méthode permettant d'obtenir des informations à partir d'un formulaire.
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String civilite = request.getParameter("civilite");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
-		Contact newContact = new Contact(civilite, nom, prenom);
+		String rue = request.getParameter("rue");
+		String codePostal = request.getParameter("codePostal");
+		String ville = request.getParameter("ville");
+		String pays = request.getParameter("pays");
+		Adresse adresse = new Adresse(rue, codePostal, ville, pays);
+		Contact newContact = new Contact(civilite, nom, prenom, adresse);
 		contactservice.save(newContact);
-		
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("contact.jsp");
 		request.setAttribute("newContact", newContact);
 		dispatcher.forward(request, response);

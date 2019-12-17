@@ -5,20 +5,41 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="stylelist.css" />
 <title>Contact</title>
 </head>
 <body>
-	<h1>Contact</h1>
+	<header id="header">
+		<a href="index.html"><strong>Acceuil</strong></a>
+	</header>
+	<h1 class="gauche">Contact</h1>
 
-		<h1>Modifier contact</h1>
-		
-	<form method="post" action="UpdateServlet">
-		Civilité : <br> <input type="text" name="civilite" placeholder=""><br>
-		Nom : <br> <input type="text" name="nom" placeholder="">><br>
-		Prenom : <br> <input type="text" name="prenom" placeholder="">><br>
-		<br> <input type="submit" value="Envoyer"> <input
-			type="reset" value="RAZ">
+	<h3 class="titregris, center">Contact à modifier</h3>
 
-	</form>
+	<div class="container">
+		<div class="center">
+			<form method="post" action="UpdateContact">
+
+				Id : <br> <input type="text" name="pk" value="${contact.pk}"><br>
+				Civilité : <br> <input type="text" name="civilite"
+					value="${contact.civilite}"><br> Nom : <br> <input
+					type="text" name="nom" value="${contact.nom}"><br>
+				Prenom : <br> <input type="text" name="prenom"
+					value="${contact.prenom}"><br> Rue : <br> <input
+					type="text" name="rue" value="${contact.adresse.rue}"><br>
+				Code Postal : <br> <input type="text" name="codePostal"
+					value="${contact.adresse.codePostal}"><br> Ville : <br>
+				<input type="text" name="ville" value="${contact.adresse.ville}"><br>
+				Pays : <br> <input type="text" name="pays"
+					value="${contact.adresse.pays}"><br> <br> <input
+					type="submit" value="Envoyer"> <input type="reset"
+					value="RAZ">
+
+			</form>
+
+		</div>
+	</div>
 </body>
 </html>
