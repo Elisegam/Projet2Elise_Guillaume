@@ -15,12 +15,15 @@
 	<th>Civilité</th>
 	<th>Nom</th>
 	<th>Prénom</th>
+	
 	</tr>
 		<c:forEach var="contact" items="${listContact}">
 			<tr>
 				<td>${contact.civilite}</td>
 				<td>${contact.nom}</td>
 				<td>${contact.prenom}</td>
+				<td><a href="modification"><p><input type="submit" value="Modif"></p></a></td>
+				<td><a href="supprimer"><p><input type="submit" value="Supprimer"></p></a></td>
 			
 			</tr>
 		</c:forEach>
